@@ -3,3 +3,4 @@ __pycache__
 .vscode
 venv/
 zuul_routes_parser.egg-info/
+test.*

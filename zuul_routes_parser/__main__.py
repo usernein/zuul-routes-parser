@@ -1,10 +1,14 @@
 import json
+import pandas as pd
 
 from glob import glob
 from rich import print
 from rich.progress import track
 from sys import argv
 from zuul_routes_parser.config import print_as_table, FileParser
+
+def write_found_result(lenght, file_count):
+     print(f"\n>>> Total de [bold green]{lenght}[/] rotas encontradas, dentre [bold green]{file_count}[/] arquivos analisados")
 
 def main():
     routes = {}
@@ -26,13 +30,19 @@ def main():
         print(json.dumps(extracted_routes))
         return
     elif view_mode == "csv":
-        return
-    elif view_mode == "xls":
-        return
+        write_found_result(lenght, file_count)
+
+        filename = input("\nInsira o nome do arquivo de destino do CSV (ex: rotas.csv):\n>>> ")
+
+        dataframe = pd.DataFrame(data=extracted_routes)
+        dataframe = (dataframe.T) # transpose columns and rows
+
+        dataframe.to_csv(filename)
+        print(f"\n:white_check_mark: Rotas exportadas com sucesso para [green]{filename}!")
     elif view_mode == "table":
         print_as_table(extracted_routes)
-
-    print(f"\n>>> Total de [bold green]{lenght}[/] rotas encontradas, dentre [bold green]{file_count}[/] arquivos analisados")
+        write_found_result(lenght, file_count)
+    
 
 if __name__ == "__main__":
     main()
