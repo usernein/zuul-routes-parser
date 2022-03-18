@@ -9,7 +9,7 @@ Pequena ferramenta para fazer parse de arquivos *.properties contendo rotas do Z
 
 ## Modo de uso
 1. Clone o repositório localmente e entre no diretório
-2. Instale o pacote usando o comando `pip install -e .`
+2. Instale o pacote usando o comando `pip install -e .` (usando o pip equivalente a uma versão suportada do Python, como pip3.9)
 3. Vá até a pasta com os arquivos `*.properties` e execute `zuul_parser`
 
 Também é possível exportar para JSON e CSV:
