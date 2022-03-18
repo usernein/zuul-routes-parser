@@ -14,4 +14,5 @@ setup(name='zuul_routes_parser',
         ]
     },
     install_requires=requirements,
+    python_requires='>=3.6',
     zip_safe=False)
