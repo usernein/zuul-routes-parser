@@ -18,7 +18,12 @@ def main():
     
     for filename in track(glob('*.properties'), description="Lendo arquivos...", transient=True):
         file_count += 1
-        file_parser.read(filename)
+        try:
+            file_parser.read(filename)
+        except Exception as e:
+            print(f"[red]{filename}:")
+            print(json.dumps(e))
+            continue
 
         extracted_routes = file_parser.extractRoutes()
         routes.extend(extracted_routes)
