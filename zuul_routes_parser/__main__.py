@@ -22,7 +22,7 @@ def main():
             file_parser.read(filename)
         except Exception as e:
             print(f"[red]{filename}:")
-            print(json.dumps(e))
+            print(e)
             continue
 
         extracted_routes = file_parser.extractRoutes()
