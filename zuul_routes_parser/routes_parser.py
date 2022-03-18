@@ -14,7 +14,7 @@ class FileParser:
             name, property, value = match.groups()
 
             if name not in routes:
-                routes[name] = {}
+                routes[name] = {"name": name}
             routes[name][property] = value
         
-        return routes
+        return routes.values()

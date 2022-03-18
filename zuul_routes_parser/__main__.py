@@ -11,31 +11,30 @@ def write_found_result(lenght, file_count):
      print(f"\n>>> Total de [bold green]{lenght}[/] rotas encontradas, dentre [bold green]{file_count}[/] arquivos analisados")
 
 def main():
-    routes = {}
+    routes = []
     file_parser = FileParser()
     file_count = 0
-    extracted_routes = {}
+    extracted_routes = []
     
     for filename in track(glob('*.properties'), description="Lendo arquivos...", transient=True):
         file_count += 1
         file_parser.read(filename)
 
         extracted_routes = file_parser.extractRoutes()
-        routes.update(extracted_routes)
+        routes.extend(extracted_routes)
 
     lenght = len(extracted_routes)
     
     view_mode = (argv[1] if len(argv) > 1 else "table").lower()
     if view_mode == "json":
-        print(json.dumps(extracted_routes))
+        print(json.dumps([*extracted_routes]))
         return
     elif view_mode == "csv":
         write_found_result(lenght, file_count)
 
-        filename = input("\nInsira o nome do arquivo de destino do CSV (ex: rotas.csv):\n>>> ")
+        filename = input("\nInsira o nome do arquivo de destino do CSV:\n>>> ")
 
         dataframe = pd.DataFrame(data=extracted_routes)
-        dataframe = (dataframe.T) # transpose columns and rows
 
         dataframe.to_csv(filename)
         print(f"\n:white_check_mark: Rotas exportadas com sucesso para [green]{filename}!")
