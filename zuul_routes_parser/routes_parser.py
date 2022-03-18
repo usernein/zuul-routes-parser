@@ -4,7 +4,7 @@ class FileParser:
     contents = ""
 
     def read(self, filename):
-         with open(filename) as f:
+         with open(filename, 'rb') as f:
             self.contents = f.read()
     
     def extractRoutes(self):
