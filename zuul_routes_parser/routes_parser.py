@@ -9,8 +9,10 @@ class FileParser:
     
     def extractRoutes(self):
         routes = {}
-        for match in re.finditer('zuul\.routes\.(.+?)\.(.+?)=(.+)', self.contents):
+
+        for match in re.finditer('(?<!\#)zuul\.routes\.(.+?)\.(.+?)=(.+)', self.contents):
             name, property, value = match.groups()
+
             if name not in routes:
                 routes[name] = {}
             routes[name][property] = value
