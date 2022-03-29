@@ -5,3 +5,4 @@ venv/
 zuul_routes_parser.egg-info/
 test.*
 .DS_Store
+*.csv
